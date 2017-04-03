@@ -4,6 +4,7 @@ html, body {
 }
 body {
   background: #353638;
+  font-family: Verdana, Geneva, sans-serif;
 }
 /*styling/layout for features/projects container (holds all features/projects)*/
 #features-ctnr {
@@ -227,4 +228,10 @@ body {
   stroke: #EA0C3A;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+#PleaseCompleteInfo {
+  color: #EA0C3A;
+  font-size: 15px;
+
 }
