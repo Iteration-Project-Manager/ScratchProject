@@ -71,7 +71,7 @@ class App extends Component {
       .delete(`/api/features/${deletedFeat[0].id}`)
       .then(() => {
         this.setState({
-          features: featuresList
+          features: featuresList,
         })
       })
   }

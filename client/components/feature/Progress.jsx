@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
+import RemoveFeature from './RemoveFeature.jsx'
 
 class Progress extends Component {
   render() {
