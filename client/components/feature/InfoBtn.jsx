@@ -7,7 +7,7 @@ class InfoBtn extends Component {
   render() {
     return (
      <div className="info-btn">
-       <button type="button" className="update-btn" onClick={this.props.infoClicked}>{this.props.text}</button>
+       <button type="button" className="update-btn" onClick={()=>{this.props.infoClicked(); if(this.props.submitFeatureChanges){this.props.submitFeatureChanges()}}}>{this.props.text}</button>
      </div>
    );
   }
