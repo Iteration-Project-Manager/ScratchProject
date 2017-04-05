@@ -28,7 +28,7 @@ class TaskInfo extends Component {
         return (
             <div className="TaskInfo">
                 {featureItemArr}
-                <input type="text" /><button>Add New Task</button>
+                <input type="text" onChange={this.props.trackNewFeatureItem} value={this.props.newFeatureItem}/><button onClick={this.props.addNewTask}>Add New Task</button>
             </div>
         )
     }

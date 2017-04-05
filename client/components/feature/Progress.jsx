@@ -6,9 +6,6 @@ class Progress extends Component {
     super(props);
   }
 
-  componentWillMount() {
-
-  }
   render() {
     let completedCount = 0;
 
