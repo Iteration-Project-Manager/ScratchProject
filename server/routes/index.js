@@ -25,4 +25,5 @@ module.exports = (app) => {
 
   // Update a single feature list items
   app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
+
 };
