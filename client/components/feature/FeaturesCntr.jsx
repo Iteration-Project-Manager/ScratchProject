@@ -4,7 +4,6 @@ import Feature from './Feature.jsx';
 class FeaturesCntr extends Component {
   render() {
     const featureArr = this.props.featuresArray.map((feature, index) => {
-      console.log(feature);
       return <Feature key={index} featureId={feature.id} featureItems={feature.featureItems} removeFeature={this.props.removeFeature} index={index} title={feature.title} deadline={feature.duration} elapsed={feature.elapsed}/>
     });
     return (
