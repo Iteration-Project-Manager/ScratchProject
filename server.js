@@ -1,11 +1,13 @@
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
-const http = require('http');
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const path = require('path');
 const cors = require('cors');
 
+
 // Set up the express app
-const app = express();
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
 
@@ -20,7 +22,18 @@ app.use(express.static(path.join(__dirname, './build')));
 // Entry to routes located in ./server/controllers/index.js
 require('./server/routes')(app);
 
-const server = http.createServer(app);
-server.listen(port, () => {
-  console.log('Listening on port 8000')
+function onConnection(socket) {
+  console.log('sockets are connected');
+  //Waits for drawing emit from main.js THEN broadcasts & emits the data to socket in main.js (line 32)
+  socket.on('postProject', (data) => socket.broadcast.emit('postProject'));
+
+  //Waits for cleared emit from canvas.html THEN broadcasts & emits data to socket in canvas.html (line 35)
+  socket.on('deleteProject', (data) => socket.broadcast.emit('deleteProject', data));
+}
+
+//On initial server connection, socket passed to onConnection function.
+io.on('connection', onConnection);
+
+http.listen(port, () => {
+  console.log('Listening on port ' + port)
 });

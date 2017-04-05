@@ -9,13 +9,13 @@ class Feature extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      elapsed: this.props.elapsed
+      elapsed: this.props.elapsed,
     }
 
     // Each Feature will have its own pseudo state to update its timer
     let interval = setInterval(() => {
       if (this.state.elapsed >= this.props.deadline) {
-        clearInterval(interval);
+        clearInterval(this.interval);
       } else {
         this.setState({ elapsed: this.state.elapsed + 1 });
       }
@@ -28,10 +28,9 @@ class Feature extends Component {
         <h1 className="feature-header">{this.props.title}</h1>
         <div className="tracker-container">
           <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
-          <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
+          <Timer duration={this.state.deadline} elapsed={this.state.elapsed} />
           <Progress />
           <InfoBtn />
-          
         </div>
       </div>
     );

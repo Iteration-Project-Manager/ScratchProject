@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
-
+// likely the area that needs to be updated.  ProgressBar is currently justa  default.
 class Progress extends Component {
   render() {
     return (
