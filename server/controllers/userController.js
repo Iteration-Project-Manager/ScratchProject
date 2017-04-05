@@ -2,39 +2,29 @@ const User = require('../models').User;
 
 const userController = {};
   // Verifies user.
-userController.verifyUser = (req, res) => {
+userController.verifyUser = (req, res, next) => {
   return User
     .find({
       where: {
         username: req.body.username,
-       // password: req.body.password,
       }
     })
     .then(user => {
       if (!user) {
         return res.status(404).send({
-          message: 'There is no user with that name.', //redirect to signup?
+          message: 'There is no user with that name.', 
         });
+      } else {
+          if (result.password === req.body.password) {
+            return next();
+          } else {
+            return res.status(404).send ({message: 'Your password in incorrect.'})
+          }
       }
-      
-      return user
-        .find({
-          where: {
-            username: req.body.username,
-            password: req.body.password,
-          }
-        })
-        .then (password => {
-          if (!password) {
-            return res.status(404).send({
-              message: 'Your password is incorrect.'
-            });
-          }
-        })
-        .catch(error => res.status(400).send(error));
     })
+
     .catch(error => res.status(400).send(error));
-}
+    }
 
 userController.createUser = (req,res) => {
     return User
@@ -43,11 +33,10 @@ userController.createUser = (req,res) => {
         password: req.body.password
       })
       .then(user => {
-        cookieController.setCookie (req, res => {
-        res.status(201).send(user);
+        return next();
       })
       .catch(error => res.status(400).send(error));
-      })
+
 }
 
    

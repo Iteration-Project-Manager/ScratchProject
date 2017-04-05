@@ -1,20 +1,19 @@
 const User = require('../models').User;
-const cookieController = {};
+const cookieController = {
 
-cookieController.setCookie = setCookie;
 
-  setCookie (req, res, next => {
-    res.cookie('cookie', Math.floor(Math.random() * 100));
-    next();
-  })
+  setCookie: (req, res, next) => {
+    res.cookie('loggedIn', Math.floor(Math.random() * 100));
+    return res.status(201).redirect('/MGMT');
+  },
 
-  isLoggedIn (req,res,next => {
-    if(req.cookies.loggedIn){
-      res.send(true);
+  isLoggedIn: (req, res, next) => {
+    if (req.cookies.loggedIn){
+      return res.status(200).redirect('../build/index.html');
     } else {
-       res.send(false);
+       res.status(400).send(new Error('error'));
     }
- })
-
+ }
+}
 
 module.exports = cookieController;

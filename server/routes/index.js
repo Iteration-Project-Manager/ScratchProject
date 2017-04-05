@@ -28,13 +28,11 @@ module.exports = (app) => {
   // Update a single feature list items
   app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
 
-  app.get('/', cookieController.setCookie);
-
   app.post('/login', userController.verifyUser, cookieController.setCookie);
 
-  app.post('/signup', userController.createUser);
+  app.post('/signup', userController.createUser, cookieController.setCookie);
 
-  app.get('/checkCookie', cookieController.isLoggedIn);
+  app.get('/MGMT', cookieController.isLoggedIn);
 
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'login.html'))
