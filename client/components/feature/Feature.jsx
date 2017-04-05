@@ -11,6 +11,8 @@ class Feature extends Component {
     super(props);
     this.state = {
       elapsed: this.props.elapsed,
+      infoClicked: false,
+      newFeatureItem: '',
       featureItems: [
         {
           "id": 4,
@@ -23,7 +25,7 @@ class Feature extends Component {
         {
           "id": 5,
           "content": "Second Test",
-          "complete": true,
+          "complete": false,
           "createdAt": "2017-04-04T18:20:02.273Z",
           "updatedAt": "2017-04-04T18:20:02.273Z",
           "featureId": 32
@@ -37,7 +39,7 @@ class Feature extends Component {
           "featureId": 32
         },
       ],
-      infoClicked: false 
+      
     }
 
     // Each Feature will have its own pseudo state to update its timer
@@ -51,6 +53,8 @@ class Feature extends Component {
 
     this.infoClicked = this.infoClicked.bind(this);
     this.trackCompleteChange = this.trackCompleteChange.bind(this);
+    this.trackNewFeatureItem = this.trackNewFeatureItem.bind(this);
+    this.addNewTask = this.addNewTask.bind(this);
   }
 
   infoClicked() {
@@ -69,6 +73,24 @@ class Feature extends Component {
     this.setState({ featureItems });
   }
 
+  trackNewFeatureItem(e) {
+    this.setState({ newFeatureItem: e.target.value },()=> {console.log(this.state.newFeatureItem)});
+    
+  }
+
+  addNewTask() {
+    console.log('storing new item');
+    let newFeatureItems = this.state.featureItems.slice(0);
+    newFeatureItems.push(        {
+          "content": this.state.newFeatureItem,
+          "complete": false,
+        });
+    this.setState({featureItems: newFeatureItems})
+    this.setState({newFeatureItem: ''}, ()=> {
+      console.log(this.state)
+    });
+    
+  }
   // changeCompletedState(featureId, itemId) {
   //   //app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
 
@@ -106,7 +128,7 @@ class Feature extends Component {
             <InfoBtn infoClicked={this.infoClicked} text='Submit' />
           </div>
           <div>
-            <TaskInfo featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange}/>
+            <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask}/>
           </div>
         </div>
       );
