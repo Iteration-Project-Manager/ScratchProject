@@ -61,10 +61,7 @@ class App extends Component {
       .then((newFeature) => {
 
         featuresList.push(newFeature.data);
-        console.log(newFeature.data);
         this.setState({ features: featuresList }, () => {
-          console.log('New Feature Added');
-          console.log(this.state.features);
         })
       })
     }

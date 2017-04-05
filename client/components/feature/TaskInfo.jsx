@@ -8,27 +8,29 @@ class TaskInfo extends Component {
     }
 
     render() {
+
         let featureItemArr = this.props.featureItems.map((featureItem, index) => {
 
             if (featureItem.complete) {
                 return (
                     <div key={`container-${index}`}>
-                        <input type="checkbox" key={index} defaultChecked onChange={()=>{this.props.trackCompleteChange(featureItem.id)}}/>
+                        <input type="checkbox" key={index} defaultChecked onChange={() => { this.props.trackCompleteChange(featureItem.id) }} />
                         {featureItem.content}
                     </div>
                 );
             }
             return (
                 <div key={`container-${index}`}>
-                    <input type="checkbox" key={index} onChange={()=>{this.props.trackCompleteChange(featureItem.id)}}/>
+                    <input type="checkbox" key={index} onChange={() => { this.props.trackCompleteChange(featureItem.id) }} />
                     {featureItem.content}
                 </div>
             );
         });
+
         return (
             <div className="TaskInfo">
                 {featureItemArr}
-                <input type="text" onChange={this.props.trackNewFeatureItem} value={this.props.newFeatureItem}/><button onClick={this.props.addNewTask}>Add New Task</button>
+                <input type="text" onChange={this.props.trackNewFeatureItem} value={this.props.newFeatureItem} /><button onClick={this.props.addNewTask}>Add New Task</button>
             </div>
         )
     }

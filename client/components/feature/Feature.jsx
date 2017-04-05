@@ -13,7 +13,7 @@ class Feature extends Component {
       elapsed: this.props.elapsed,
       infoClicked: false,
       newFeatureItem: '',
-      featureItems: this.props.featureItems,
+      featureItems: [],
 
     }
 
@@ -87,6 +87,12 @@ class Feature extends Component {
           console.log('successfully posted new item to DB')
         })
       }
+    }
+  }
+
+  componentWillMount() {
+    if(this.props.featureItems) {
+      this.setState({featureItems: this.props.featureItems})
     }
   }
 
