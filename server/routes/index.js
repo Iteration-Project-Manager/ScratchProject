@@ -1,5 +1,7 @@
 const featuresController = require('../controllers').features;
 const featureItemsController = require('../controllers').featureItems;
+const userController = require('../controllers').user;
+const cookieController = require('../controllers/cookieController');
 
 module.exports = (app) => {
   // Save one feature title and the deadline to the database
@@ -26,4 +28,18 @@ module.exports = (app) => {
   // Update a single feature list items
   app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
 
+<<<<<<< HEAD
+  app.post('/login', userController.verifyUser, cookieController.setCookie);
+
+  app.post('/signup', userController.createUser, cookieController.setCookie);
+
+  app.get('/MGMT', cookieController.isLoggedIn);
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login.html'))
+  })
+
+
+=======
+>>>>>>> 4192f57b6c1e78f123839aca47a12e77d557c16e
 };

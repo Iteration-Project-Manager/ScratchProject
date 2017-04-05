@@ -45,7 +45,7 @@ class Feature extends Component {
     // Each Feature will have its own pseudo state to update its timer
     let interval = setInterval(() => {
       if (this.state.elapsed >= this.props.deadline) {
-        clearInterval(this.interval);
+        clearInterval(interval);
       } else {
         this.setState({ elapsed: this.state.elapsed + 1 });
       }

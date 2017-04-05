@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import CircularProgressbar from 'react-circular-progressbar';
 // likely the area that needs to be updated.  ProgressBar is currently justa  default.
+import RemoveFeature from './RemoveFeature.jsx'
+
 class Progress extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class Progress extends Component {
       if (this.props.featureItems[i].complete) completedCount += 1;
     }
     let percent = completedCount / this.props.featureItems.length;
-  
+
     return (
      <div className="prog-container">
        <CircularProgressbar className="prog-circle" strokeWidth={6} percentage={Math.floor(percent * 100)} />
