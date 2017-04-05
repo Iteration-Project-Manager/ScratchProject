@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     duration: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    // infoClicked: {
-    //   type: DataTypes.BOOLEAN
-    // }
+    }
   }, {
       classMethods: {
         associate: (models) => {

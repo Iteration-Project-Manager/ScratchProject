@@ -13,33 +13,8 @@ class Feature extends Component {
       elapsed: this.props.elapsed,
       infoClicked: false,
       newFeatureItem: '',
-      featureItems: [
-        {
-          "id": 4,
-          "content": "First Test",
-          "complete": false,
-          "createdAt": "2017-04-04T18:19:56.399Z",
-          "updatedAt": "2017-04-04T18:19:56.399Z",
-          "featureId": 32
-        },
-        {
-          "id": 5,
-          "content": "Second Test",
-          "complete": false,
-          "createdAt": "2017-04-04T18:20:02.273Z",
-          "updatedAt": "2017-04-04T18:20:02.273Z",
-          "featureId": 32
-        },
-        {
-          "id": 6,
-          "content": "Third Test",
-          "complete": false,
-          "createdAt": "2017-04-04T18:20:02.609Z",
-          "updatedAt": "2017-04-04T18:20:02.609Z",
-          "featureId": 32
-        },
-      ],
-      
+      featureItems: this.props.featureItems,
+
     }
 
     // Each Feature will have its own pseudo state to update its timer
@@ -55,6 +30,7 @@ class Feature extends Component {
     this.trackCompleteChange = this.trackCompleteChange.bind(this);
     this.trackNewFeatureItem = this.trackNewFeatureItem.bind(this);
     this.addNewTask = this.addNewTask.bind(this);
+    this.submitFeatureChanges = this.submitFeatureChanges.bind(this);
   }
 
   infoClicked() {
@@ -65,55 +41,54 @@ class Feature extends Component {
   trackCompleteChange(ItemId, e) {
     let featureItems = this.state.featureItems.slice(0)
       .map((item, index) => {
-      if (item.id === ItemId) {
-        item.complete = !item.complete;
-      };
-      return item;
-    });
+        if (item.id === ItemId) {
+          item.complete = !item.complete;
+        };
+        return item;
+      });
     this.setState({ featureItems });
   }
 
   trackNewFeatureItem(e) {
-    this.setState({ newFeatureItem: e.target.value },()=> {console.log(this.state.newFeatureItem)});
-    
+    this.setState({ newFeatureItem: e.target.value }, () => { console.log(this.state.newFeatureItem) });
+
   }
 
   addNewTask() {
     console.log('storing new item');
     let newFeatureItems = this.state.featureItems.slice(0);
-    newFeatureItems.push(        {
-          "content": this.state.newFeatureItem,
-          "complete": false,
-        });
-    this.setState({featureItems: newFeatureItems})
-    this.setState({newFeatureItem: ''}, ()=> {
-      console.log(this.state)
+    newFeatureItems.push({
+      "content": this.state.newFeatureItem,
+      "complete": false,
     });
-    
+    this.setState({ featureItems: newFeatureItems })
+    this.setState({ newFeatureItem: '' }, () => {
+    });
+
   }
-  // changeCompletedState(featureId, itemId) {
-  //   //app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
 
-  //   axios
-  //     .put(`/api/features/${featureId}/items/${itemId}`, {})
-  //     .then((allFeatures) => {
-
-  //       // calculates the total amount of time since the project was created and renders the correct time (red circle)
-  //       for (let i = 0; i < allFeatures.data.length; i += 1) {
-  //         let createdTime = Date.parse(allFeatures.data[i].createdAt);
-  //         let currentTime = Date.now();
-  //         let elapsed = (currentTime - createdTime) / 1000; // converts ms to secs
-  //         allFeatures.data[i].elapsed = elapsed > allFeatures.data[i].duration ? allFeatures.data[i].duration : elapsed;
-  //       }
-
-  //       featuresList = allFeatures.data;
-
-  //       this.setState({
-  //         features: featuresList,
-  //       })
-  //     })
-
-  // }
+  submitFeatureChanges() {
+    //   //app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
+    //for each object in array
+    //if there is an ID, if 
+    console.log('submitting changes');
+    let featureItems = this.state.featureItems;
+    console.log('feature items ', featureItems)
+    for (let i = 0; i < featureItems.length; i += 1) {
+      if (featureItems[i].id) {
+        axios
+          .put(`/api/features/${this.props.featureId}/items/${featureItems[i].id}`, {complete: featureItems[i].complete})
+          .then(() => {
+          })
+      } else {
+        axios
+        .post(`/api/features/${this.props.featureId}/items`, featureItems[i])
+        .then(() => {
+          console.log('successfully posted new item to DB')
+        })
+      }
+    }
+  }
 
   render() {
 
@@ -125,10 +100,10 @@ class Feature extends Component {
             <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
             <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
             <Progress featureItems={this.state.featureItems} />
-            <InfoBtn infoClicked={this.infoClicked} text='Submit' />
+            <InfoBtn infoClicked={this.infoClicked} submitFeatureChanges={this.submitFeatureChanges} text='Submit' />
           </div>
           <div>
-            <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask}/>
+            <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask} />
           </div>
         </div>
       );
@@ -139,7 +114,7 @@ class Feature extends Component {
           <div className="tracker-container">
             <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
             <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress featureItems={this.state.featureItems}/>
+            <Progress featureItems={this.state.featureItems} />
             <InfoBtn infoClicked={this.infoClicked} text='Update Tasks' />
           </div>
         </div>
