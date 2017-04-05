@@ -11,8 +11,6 @@ class Feature extends Component {
     super(props);
     this.state = {
       elapsed: this.props.elapsed,
-<<<<<<< HEAD
-=======
       infoClicked: false,
       newFeatureItem: '',
       featureItems: [
@@ -41,8 +39,6 @@ class Feature extends Component {
           "featureId": 32
         },
       ],
-
->>>>>>> 68b4c6b4b3a79d36be8136bf064ef67cfb0ac124
     }
 
     // Each Feature will have its own pseudo state to update its timer
@@ -94,70 +90,43 @@ class Feature extends Component {
     });
 
   }
-  // changeCompletedState(featureId, itemId) {
-  //   //app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
-
-  //   axios
-  //     .put(`/api/features/${featureId}/items/${itemId}`, {})
-  //     .then((allFeatures) => {
-
-  //       // calculates the total amount of time since the project was created and renders the correct time (red circle)
-  //       for (let i = 0; i < allFeatures.data.length; i += 1) {
-  //         let createdTime = Date.parse(allFeatures.data[i].createdAt);
-  //         let currentTime = Date.now();
-  //         let elapsed = (currentTime - createdTime) / 1000; // converts ms to secs
-  //         allFeatures.data[i].elapsed = elapsed > allFeatures.data[i].duration ? allFeatures.data[i].duration : elapsed;
-  //       }
-
-  //       featuresList = allFeatures.data;
-
-  //       this.setState({
-  //         features: featuresList,
-  //       })
-  //     })
-
-  // }
 
   render() {
-<<<<<<< HEAD
+
+    const project = (
+      <div className="tracker-container">
+        <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
+        <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
+        <Progress featureItems={this.state.featureItems} />
+        <InfoBtn infoClicked={this.infoClicked} text='Submit' />
+      </div>
+    );
+
+    const tasks = (
+      <div>
+        <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask}/>
+      </div>
+    );
+
+    let projectAndTasks;
+
+    if (this.state.infoClicked) {
+      projectAndTasks = (
+        {project}
+        {tasks}
+      );
+    } else {
+      projectAndTasks = (
+        {project}
+      );
+    }
+
     return (
       <div className="feature-container">
         <h1 className="feature-header">{this.props.title}</h1>
-        <div className="tracker-container">
-          <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
-          <Timer duration={this.state.deadline} elapsed={this.state.elapsed} />
-          <Progress />
-          <InfoBtn />
-=======
-
-    if (this.state.infoClicked) {
-      return (
-        <div className="feature-container">
-          <h1 className="feature-header">{this.props.title}</h1>
-          <div className="tracker-container">
-            <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
-            <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress featureItems={this.state.featureItems} />
-            <InfoBtn infoClicked={this.infoClicked} text='Submit' />
-          </div>
-          <div>
-            <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask}/>
-          </div>
->>>>>>> 68b4c6b4b3a79d36be8136bf064ef67cfb0ac124
-        </div>
-      );
-    } else {
-      return (
-        <div className="feature-container">
-          <h1 className="feature-header">{this.props.title}</h1>
-          <div className="tracker-container">
-            <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
-            <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress featureItems={this.state.featureItems}/>
-            <InfoBtn infoClicked={this.infoClicked} text='Update Tasks' />
-          </div>
-        </div>
-      );
+        {projectAndTasks}
+      </div>
+    );
     }
   }
 }
