@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <title>Scratch Project log in</title>
+  </head>
+  <body>
+    <div id="container">
+      <p class="login">Please log in</p>
+      <form action="http://localhost:8000/login" method="post">
+        <input type='text' placeholder='Enter your name'>
+        <input type='password' placeholder='Enter your password'>
+        <button type='submit' value='submit'>Log In</button>
+      </form>
+      <div id=clear></div>
+      <div id="signup">
+        <a href='signup.html'><span id="colorChange">or sign up</span></a>
+      </div>
+    </div>
+</html>
