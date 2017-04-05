@@ -51,22 +51,22 @@ class App extends Component {
     } else {
 
       this.setState({ completeInputInfo: true })
-    let feature = {
-      title: title,
-      duration: Number(duration)
-    }
+      let feature = {
+        title: title,
+        duration: Number(duration)
+      }
 
-    axios
-      .post('/api/features', feature)
-      .then((newFeature) => {
+      axios
+        .post('/api/features', feature)
+        .then((newFeature) => {
 
-        featuresList.push(newFeature.data);
-        console.log(newFeature.data);
-        this.setState({ features: featuresList }, () => {
-          console.log('New Feature Added');
+          featuresList.push(newFeature.data);
+          console.log(newFeature.data);
+          this.setState({ features: featuresList }, () => {
+            console.log('New Feature Added');
+          });
+          socket.emit('postProject');
         });
-        socket.emit('postProject');
-      })
     }
   }
 
@@ -84,17 +84,15 @@ class App extends Component {
           features: featuresList
         });
         socket.emit('deleteProject');
-      })
+      });
   }
 
 
   render() {
-
     const addFeature = this.addFeature;
     const featuresArray = this.state.features;
     const removeFeature = this.removeFeature;
-    console.log('-----features in App.jsx-----');
-    console.log(featuresArray);
+
     // makes a get request on other windows
     // open to the current page for when a post request is made
     // this updates all other pages that are open
@@ -102,7 +100,6 @@ class App extends Component {
       axios
         .get('/api/features')
         .then((allFeatures) => {
-          console.log('get request executed');
           // calculates the total amount of time since the project was created and renders the correct time (red circle)
           for (let i = 0; i < allFeatures.data.length; i += 1) {
             let createdTime = Date.parse(allFeatures.data[i].createdAt);
