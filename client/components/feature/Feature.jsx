@@ -37,7 +37,7 @@ class Feature extends Component {
           "featureId": 32
         },
       ],
-      infoClicked: true
+      infoClicked: false 
     }
 
     // Each Feature will have its own pseudo state to update its timer
@@ -54,7 +54,6 @@ class Feature extends Component {
   }
 
   infoClicked() {
-    console.log('clicked');
     let newClick = this.state.infoClicked ? { infoClicked: false } : { infoClicked: true };
     this.setState(newClick);
   }
@@ -103,7 +102,7 @@ class Feature extends Component {
           <div className="tracker-container">
             <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
             <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress />
+            <Progress featureItems={this.state.featureItems} />
             <InfoBtn infoClicked={this.infoClicked} text='Submit' />
           </div>
           <div>
@@ -118,7 +117,7 @@ class Feature extends Component {
           <div className="tracker-container">
             <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
             <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress />
+            <Progress featureItems={this.state.featureItems}/>
             <InfoBtn infoClicked={this.infoClicked} text='Update Tasks' />
           </div>
         </div>
