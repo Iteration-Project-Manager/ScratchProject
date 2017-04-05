@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     duration: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
+    }
   }, {
       classMethods: {
         associate: (models) => {

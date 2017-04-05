@@ -28,6 +28,7 @@ module.exports = (app) => {
   // Update a single feature list items
   app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
 
+<<<<<<< HEAD
   app.post('/login', userController.verifyUser, cookieController.setCookie);
 
   app.post('/signup', userController.createUser, cookieController.setCookie);
@@ -39,4 +40,6 @@ module.exports = (app) => {
   })
 
 
+=======
+>>>>>>> 4192f57b6c1e78f123839aca47a12e77d557c16e
 };
