@@ -156,6 +156,7 @@ body {
   border-style: none;
   border: 1px solid #C0193B;
   border-radius: 50%;
+  z-index: 5;
 }
 
 .time-container {

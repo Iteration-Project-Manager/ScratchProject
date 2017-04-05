@@ -5,7 +5,7 @@ class Progress extends Component {
   render() {
     return (
      <div className="prog-container">
-       <CircularProgressbar className="prog-circle" strokeWidth={6} percentage={38} />
+       <CircularProgressbar className="prog-circle" strokeWidth={6} percentage={0} />
      </div>
    );
   }

@@ -5,6 +5,7 @@ import CheckpointCntr from './checkpoint/CheckpointCntr.jsx';
 import axios from 'axios';
 import PleaseCompleteInfo from './feature/PleaseCompleteInfo.jsx';
 
+
 // This array is constant. We add and remove from it and then use it to set state.
 // By doing this, we do not have to create a new variable each time we want to set state.
 let featuresList = [];
