@@ -213,10 +213,10 @@ body {
 }
 
 .CircularProgressbar .CircularProgressbar-text {
-  fill: #353638;
   font-size: 20px;
   dominant-baseline: middle;
   text-anchor: middle;
+  display: none;
 }
 
 .prog-container .CircularProgressbar .CircularProgressbar-path {

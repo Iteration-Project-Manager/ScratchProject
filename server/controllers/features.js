@@ -50,7 +50,7 @@ module.exports = {
   // Update a single feature
   update(req, res) {
     return Feature
-      .findById(req.params.featureId, {
+      .findById(req.params.featureId, { // searches for a single feature
         include: [{
           model: FeatureItem,
           as: 'featureItems',
@@ -64,7 +64,7 @@ module.exports = {
         }
         return feature
           .update({
-            title: req.body.title || feature.title,
+            title: req.body.title || feature.title, // updates the found feature by the req's body.  If the req has no body, just leave the feature as is
           })
           .then(() => res.status(200).send(feature))  // Send back the updated feature.
           .catch((error) => res.status(400).send(error));

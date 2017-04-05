@@ -1,0 +1,78 @@
+body {
+  background: #353638;
+  font-family: Verdana, Geneva, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  width: 413px;
+  margin: auto;
+  margin-top: 150px;
+  padding: 0;
+  
+}
+
+input {
+  margin: 10px 0 10px 0;
+  padding-left: 10px;
+  width: 400px;
+  height: 50px;
+  color: white;
+  background: transparent;
+  border-style: none;
+  border-radius: 5px;
+  border: 1px solid white;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+input:hover {
+  border: 1px solid #EA0C3A;
+}
+
+button {
+  margin: 12px auto 0 auto;
+  width: 150px;
+  height: 50px;
+  color: white;
+  background: transparent;
+  border-style: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 16px;
+  position: relative;
+  float: right;
+
+}
+
+button:hover {
+  color: #A0FF00;
+  border: 1px solid #A0FF00;
+}
+
+.login {
+  color: white;
+  text-align: center;
+  font-weight: 400;
+}
+
+#signup {
+  margin-top: 17px;
+  float: right;
+}
+
+a:link {
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  text-decoration: none;
+}
+
+#colorChange {
+  color: #A0FF00;
+}
+
+#clear {
+  clear: right;
+}

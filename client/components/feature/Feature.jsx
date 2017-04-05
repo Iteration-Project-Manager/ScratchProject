@@ -13,8 +13,33 @@ class Feature extends Component {
       elapsed: this.props.elapsed,
       infoClicked: false,
       newFeatureItem: '',
+      featureItems: [
+        {
+          "id": 4,
+          "content": "First Test",
+          "complete": false,
+          "createdAt": "2017-04-04T18:19:56.399Z",
+          "updatedAt": "2017-04-04T18:19:56.399Z",
+          "featureId": 32
+        },
+        {
+          "id": 5,
+          "content": "Second Test",
+          "complete": false,
+          "createdAt": "2017-04-04T18:20:02.273Z",
+          "updatedAt": "2017-04-04T18:20:02.273Z",
+          "featureId": 32
+        },
+        {
+          "id": 6,
+          "content": "Third Test",
+          "complete": false,
+          "createdAt": "2017-04-04T18:20:02.609Z",
+          "updatedAt": "2017-04-04T18:20:02.609Z",
+          "featureId": 32
+        },
+      ],
       featureItems: this.props.featureItems,
-
     }
 
     // Each Feature will have its own pseudo state to update its timer
@@ -50,8 +75,8 @@ class Feature extends Component {
   }
 
   trackNewFeatureItem(e) {
+    this.setState({ newFeatureItem: e.target.value },()=> {console.log(this.state.newFeatureItem)});
     this.setState({ newFeatureItem: e.target.value }, () => { console.log(this.state.newFeatureItem) });
-
   }
 
   addNewTask() {
@@ -64,13 +89,12 @@ class Feature extends Component {
     this.setState({ featureItems: newFeatureItems })
     this.setState({ newFeatureItem: '' }, () => {
     });
-
   }
 
   submitFeatureChanges() {
     //   //app.put('/api/features/:featureId/items/:featureItemId', featureItemsController.update);
     //for each object in array
-    //if there is an ID, if 
+    //if there is an ID, if
     console.log('submitting changes');
     let featureItems = this.state.featureItems;
     console.log('feature items ', featureItems)
@@ -92,34 +116,70 @@ class Feature extends Component {
 
   render() {
 
+    let project;
+    let tasks = '';
+
     if (this.state.infoClicked) {
-      return (
-        <div className="feature-container">
-          <h1 className="feature-header">{this.props.title}</h1>
-          <div className="tracker-container">
-            <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
-            <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress featureItems={this.state.featureItems} />
-            <InfoBtn infoClicked={this.infoClicked} submitFeatureChanges={this.submitFeatureChanges} text='Submit' />
-          </div>
-          <div>
-            <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask} />
-          </div>
+      project = (
+        <div className="tracker-container">
+          <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
+          <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
+          <Progress featureItems={this.state.featureItems} />
+          <InfoBtn infoClicked={this.infoClicked} submitFeatureChanges={this.submitFeatureChanges} text='Submit' />
+        </div>
+      );
+
+      tasks = (
+        <div>
+          <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask} />
         </div>
       );
     } else {
-      return (
-        <div className="feature-container">
-          <h1 className="feature-header">{this.props.title}</h1>
-          <div className="tracker-container">
-            <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
-            <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
-            <Progress featureItems={this.state.featureItems} />
-            <InfoBtn infoClicked={this.infoClicked} text='Update Tasks' />
-          </div>
+      project = (
+        <div className="tracker-container">
+          <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
+          <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
+          <Progress featureItems={this.state.featureItems} />
+          <InfoBtn infoClicked={this.infoClicked} submitFeatureChanges={this.submitFeatureChanges} text='Update Tasks' />
         </div>
       );
     }
+// =======
+//       return (
+//         <div className="feature-container">
+//           <h1 className="feature-header">{this.props.title}</h1>
+//           <div className="tracker-container">
+//             <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
+//             <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
+//             <Progress featureItems={this.state.featureItems} />
+//             <InfoBtn infoClicked={this.infoClicked} submitFeatureChanges={this.submitFeatureChanges} text='Submit' />
+//           </div>
+//           <div>
+//             <TaskInfo newFeatureItem={this.state.newFeatureItem} featureItems={this.state.featureItems} trackCompleteChange={this.trackCompleteChange} trackNewFeatureItem={this.trackNewFeatureItem} addNewTask={this.addNewTask} />
+//           </div>
+//         </div>
+//       );
+//     } else {
+//       return (
+//         <div className="feature-container">
+//           <h1 className="feature-header">{this.props.title}</h1>
+//           <div className="tracker-container">
+//             <RemoveFeature index={this.props.index} removeFeature={this.props.removeFeature} />
+//             <Timer duration={this.props.deadline} elapsed={this.state.elapsed} />
+//             <Progress featureItems={this.state.featureItems} />
+//             <InfoBtn infoClicked={this.infoClicked} text='Update Tasks' />
+//           </div>
+//         </div>
+// >>>>>>> 4192f57b6c1e78f123839aca47a12e77d557c16e
+//       );
+
+    return (
+      <div className="feature-container">
+        <h1 className="feature-header">{this.props.title}</h1>
+        {project}
+        {tasks}
+      </div>
+    );
   }
 }
 
